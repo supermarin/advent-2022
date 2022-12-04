@@ -10,9 +10,10 @@
         pkgs = nixpkgs.legacyPackages.${system};
         deps = with pkgs; [
           fish
-          ruby
-          rubyPackages.pry
-          rubyPackages.pry-doc
+          ruby_3_1
+          rubyPackages_3_1.pry
+          rubyPackages_3_1.pry-doc
+          rubyPackages_3_1.solargraph
         ];
       in
       {
