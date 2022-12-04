@@ -8,10 +8,10 @@ result = input.map do |bag|
   b = bag[bag.length / 2...]
   priorities[a.intersection(b)[0]]
 end
-puts "1st part: #{result.sum}"
+puts "First: #{result.sum}"
 
 sum = 0
 input.each_slice(3) do |s|
   sum += priorities[s.reduce(&:intersection)[0]]
 end
-puts "2nd part: #{sum}"
+puts "Second: #{sum}"

@@ -48,8 +48,7 @@ games = input.reduce([]) do |acc, g|
   acc[i] = losewindraw[round] + suits[us] 
   acc
 end
-puts "First challenge: #{games.sum}"
-
+puts "First: #{games.sum}"
 
 i = -1
 games_2 = input.reduce([]) do |acc, g|
@@ -60,5 +59,4 @@ games_2 = input.reduce([]) do |acc, g|
   acc[i] = scores_2[outcome] + suits[us] 
   acc
 end
-puts "Second challenge: #{games_2.sum}"
-
+puts "Second: #{games_2.sum}"
