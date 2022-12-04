@@ -20,7 +20,7 @@ losewindraw = {
   'C Z' => 3
 }
 
-scores_2 = {
+scores2 = {
   'X' => 0, # lose
   'Y' => 3, # draw
   'Z' => 6 # win
@@ -42,7 +42,7 @@ input = File.readlines('2-input.txt')
 
 games = input.reduce(0) do |acc, g|
   round = g.chomp # g = String "C X\n"
-  they, us = round.split(' ')
+  _, us = round.split(' ')
   acc += losewindraw[round] + suits[us]
   acc
 end
@@ -50,9 +50,9 @@ puts "First: #{games}"
 
 games2 = input.reduce(0) do |acc, g|
   round = g.chomp # g = String "C X\n"
-  they, outcome = round.split(' ')
+  _, outcome = round.split(' ')
   us = our_suit[round]
-  acc += scores_2[outcome] + suits[us]
+  acc += scores2[outcome] + suits[us]
   acc
 end
 puts "Second: #{games2}"
