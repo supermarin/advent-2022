@@ -9,6 +9,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         deps = with pkgs; [
+          fish
           ruby
           rubyPackages.pry
           rubyPackages.pry-doc
@@ -16,7 +17,8 @@
       in
       {
         devShell = pkgs.mkShell {
-          buildInputs = [ deps ];
+          buildInputs = deps;
+          shellHook = "exec fish";
         };
       });
 }
