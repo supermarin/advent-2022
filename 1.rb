@@ -1,4 +1,3 @@
-# first problem
-File.read("1-input.txt").split("\n\n").map { |e| e.split("\n").map(&:to_i).sum }.max
-# second problem
-File.read("1-input.txt").split("\n\n").map { |e| e.split("\n").map(&:to_i).sum }.sort[-3..].sum
+input = File.read('1-input.txt').split("\n\n")
+puts "First: #{input.map { |e| e.split("\n").map(&:to_i).sum }.max}"
+puts "Second: #{input.map { |e| e.split("\n").map(&:to_i).sum }.sort[-3..].sum}"
