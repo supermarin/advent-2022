@@ -11,3 +11,7 @@ If you would like to try running the examples, you'll need
 
 From the project root, execute `nix develop` and Nix will take care of the rest
 (installing Ruby, pry, solargraph, etc.).
+
+Each day has it's own .rb file and .txt input (e.g. 1.rb, 1-input.rb), and
+contains both solutions for the day. Run with `$ ruby 1.rb` where 1 is the day
+you want to run.
