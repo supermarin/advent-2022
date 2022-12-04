@@ -20,17 +20,45 @@ losewindraw = {
   "C Z" => 3,
 }
 
+scores_2 = {
+  "X" => 0, # lose
+  "Y" => 3, # draw
+  "Z" => 6, # win
+}
+
+our_suit = { 
+  "A X" => "C",
+  "A Y" => "A",
+  "A Z" => "B",
+  "B X" => "A",
+  "B Y" => "B",
+  "B Z" => "C",
+  "C X" => "B",
+  "C Y" => "C",
+  "C Z" => "A",
+}
+
+input = File.readlines("2-input.txt")
+
 i = -1
-games = File.readlines("2-input.txt").reduce([]) do |acc, g|
+games = input.reduce([]) do |acc, g|
   i += 1
-
-  round = g.chomp
+  round = g.chomp # g = String "C X\n"
   they, us = round.split(" ")
-
-  # input = String "C X\n"
-  # returns = Int (score, lose/draw/win + suit)
   acc[i] = losewindraw[round] + suits[us] 
   acc
 end
+puts "First challenge: #{games.sum}"
 
-puts games.sum
+
+i = -1
+games_2 = input.reduce([]) do |acc, g|
+  i += 1
+  round = g.chomp # g = String "C X\n"
+  they, outcome = round.split(" ")
+  us = our_suit[round]
+  acc[i] = scores_2[outcome] + suits[us] 
+  acc
+end
+puts "Second challenge: #{games_2.sum}"
+
