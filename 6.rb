@@ -1,15 +1,11 @@
-input = File.read('6-input.txt')
-def seqstart(stream)
+# frozen_string_literal: true
+
+def seqstart(stream, len)
   stream.each_char.with_index do |_, i|
-    return i + 1 if i > 2 && stream[i - 3..i].split('').uniq.count == 4
+    return i + 1 if
+    i > (len - 2) && stream[i - (len - 1)..i].split('').uniq.count == len
   end
 end
 
-def msgstart(stream)
-  stream.each_char.with_index do |_, i|
-    return i + 1 if i > 12 && stream[i - 13..i].split('').uniq.count == 14
-  end
-end
-
-puts "First: #{seqstart(input)}"
-puts "Seconds: #{msgstart(input)}"
+puts "First: #{seqstart(File.read('6-input.txt'), 4)}"
+puts "Second: #{seqstart(File.read('6-input.txt'), 14)}"
