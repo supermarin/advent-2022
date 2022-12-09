@@ -24,8 +24,9 @@ scores = grid.map.with_index do |row, i|
 
     l = row[0...j].reverse
     r = row[j + 1..]
-    u = grid[0...i].map { |g| g[j] }.reverse
-    d = grid[i + 1..].map { |g| g[j] }
+
+    u = (0...i).map { |r| grid[r][j] }.reverse
+    d = (i + 1...grid.count).map { |r| grid[r][j] }
 
     [u, l, d, r].reduce([]) do |acc, trees|
       untilblocked = []
