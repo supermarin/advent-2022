@@ -45,10 +45,9 @@ def resolve(moves, deltas, snake)
     delta = deltas[m[0]]
     n = m[1].to_i
 
-    n.times do |_i|
+    n.times do
       (0...snake.count).each do |piece|
         if piece == 0
-          before = snake[piece].dup
           snake[piece][0] += delta[0]
           snake[piece][1] += delta[1]
           next
