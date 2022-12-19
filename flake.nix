@@ -11,7 +11,7 @@
         deps = with pkgs; [
           fish
           ruby_3_1
-          rubyPackages_3_1.pry
+          rubyPackages_3_1.pry-byebug
           rubyPackages_3_1.pry-doc
           rubyPackages_3_1.solargraph
         ];
