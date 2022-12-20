@@ -17,13 +17,27 @@ class Monkey
     lines = input.lines.map(&:lstrip).map(&:chomp)
     @id = lines.shift.split[1].sub(':', '').to_i
     @items = lines.shift.split(': ')[1].split(', ').map(&:to_i)
-    @operation = lines.shift.split(': ')[1]
+    @operation = parse_operation(lines.shift.split(': ')[1])
     @test = lines
     @inspected_ct = 0
   end
 
+  def parse_operation(input)
+    numorold = proc do |n, old|
+      n == 'old' ? old : n.to_i
+    end
+    operators = {
+      '*' => proc { |a, b, old| numorold.call(a, old) * numorold.call(b, old) },
+      '+' => proc { |a, b, old| numorold.call(a, old) + numorold.call(b, old) }
+    }
+    a, operator, b = input.split(' = ')[1].split
+    proc { |old|
+      operators[operator].call(a, b, old)
+    }
+  end
+
   def worry_level(item)
-    eval @operation.gsub('old', item.to_s)
+    @operation.call(item)
   end
 
   def which_monkey(item)
