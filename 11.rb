@@ -18,7 +18,8 @@ class Monkey
     @id = lines.shift.split[1].sub(':', '').to_i
     @items = lines.shift.split(': ')[1].split(', ').map(&:to_i)
     @operation = parse_operation(lines.shift.split(': ')[1])
-    @test = lines
+    @divisor = lines.shift.split('divisible by ')[1].to_i
+    @monkey_true, @monkey_false = lines.map { |l| l.split('throw to monkey ')[1].to_i }
     @inspected_ct = 0
   end
 
@@ -41,12 +42,7 @@ class Monkey
   end
 
   def which_monkey(item)
-    div = @test[0].split('divisible by ')[1].to_i
-    branch = {
-      true => 1,
-      false => 2
-    }[item % div == 0]
-    @test[branch].split('throw to monkey ')[1].to_i
+    item % @divisor == 0 ? @monkey_true : @monkey_false
   end
 
   def play_round(divide: 3)
