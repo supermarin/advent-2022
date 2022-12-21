@@ -38,26 +38,14 @@ class Monkey
     value % @divisor == 0 ? @monkey_true : @monkey_false
   end
 
-  def play_round_no_divide
+  def play_round(divide: true)
     until @items.empty?
       item = @items.shift
       @inspected_ct += 1
 
       value = item % Game.common_divisor
       value = @operation.call(value)
-      monkey = which_monkey(value)
-
-      Game.monkeys[monkey].items << value
-    end
-  end
-
-  def play_round
-    until @items.empty?
-      item = @items.shift
-      @inspected_ct += 1
-
-      value = @operation.call(item)
-      value /= 3
+      value /= 3 if divide
       monkey = which_monkey(value)
 
       Game.monkeys[monkey].items << value
@@ -72,6 +60,6 @@ most_active = Game.monkeys.sort_by(&:inspected_ct).reverse
 puts "First: #{most_active.map(&:inspected_ct)[0..1].reduce(:*)}"
 
 Game.monkeys = input.split("\n\n").map { |m| Monkey.new(m) }
-10_000.times { |i| Game.monkeys.each(&:play_round_no_divide) }
+10_000.times { |i| Game.monkeys.each { |m| m.play_round(divide: false) } }
 most_active = Game.monkeys.sort_by(&:inspected_ct).reverse
 puts "Second: #{most_active.map(&:inspected_ct)[0..1].reduce(:*)}"
